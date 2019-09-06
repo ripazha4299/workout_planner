@@ -1,0 +1,75 @@
+Dim l, c, b, a, wb, count1 As Integer
+Dim UID, fl, fb, fc, fa, s(3) As String
+
+
+Private Sub Command2_Click()
+
+exe.Recordset.MoveFirst
+
+While exe.Recordset.EOF = False
+
+If exe.Recordset.Fields("chart") = wb Then
+
+  If (count1 = 0) Then
+List1.AddItem (exe.Recordset.Fields("wName") & "  " & exe.Recordset.Fields("reps") & "  " & exe.Recordset.Fields("set"))
+
+ElseIf count1 = 1 Then
+    If exe.Recordset.Fields(s(0)) = 0 Then
+    List1.AddItem (exe.Recordset.Fields("wName") & "  " & exe.Recordset.Fields("reps") & "  " & exe.Recordset.Fields("set"))
+    End If
+ElseIf count1 = 2 Then
+    If ((exe.Recordset.Fields(s(0)) = 0) And (exe.Recordset.Fields(s(0)) = 0)) Then
+    List1.AddItem (exe.Recordset.Fields("wName") & "  " & exe.Recordset.Fields("reps") & "  " & exe.Recordset.Fields("set"))
+    End If
+ElseIf count1 = 3 Then
+    If ((exe.Recordset.Fields(s(0)) = 0) And (exe.Recordset.Fields(s(0)) = 0) And (exe.Recordset.Fields(s(0)) = 0)) Then
+    List1.AddItem (exe.Recordset.Fields("wName") & "  " & exe.Recordset.Fields("reps") & "  " & exe.Recordset.Fields("set"))
+    End If
+Else
+List1.AddItem (" NO WORKOUT POSSIBLE. Get well soon ")
+End If
+
+End If
+exe.Recordset.MoveNext
+Wend
+
+Command2.Visible = False
+
+End Sub
+
+Private Sub Form_Load()
+count1 = 0
+UID = Label5.Caption
+Form1.Adodc1.RecordSource = "select *from UserD where UID = '" + UID + "'"
+
+If (Form1.Adodc1.Recordset.EOF = False) Then
+wb = Form1.Adodc1.Recordset.Fields("BASIC")
+l = Form1.Adodc1.Recordset.Fields("LEGS")
+c = Form1.Adodc1.Recordset.Fields("CHEST")
+b = Form1.Adodc1.Recordset.Fields("BACK")
+a = Form1.Adodc1.Recordset.Fields("ARMS")
+
+If l = 0 Then
+s(count1) = "l"
+count1 = count1 + 1
+End If
+
+If a = 0 Then
+s(count1) = "a"
+count1 = count1 + 1
+End If
+
+If b = 0 Then
+s(count1) = "b"
+count1 = count1 + 1
+End If
+
+If c = 0 Then
+s(count1) = "c"
+count1 = count1 + 1
+End If
+
+End If
+
+End Sub
+

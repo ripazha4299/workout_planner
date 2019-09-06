@@ -1,0 +1,20 @@
+Private Sub Command2_Click()
+
+exe.Recordset.MoveFirst
+While exe.Recordset.EOF = False
+If exe.Recordset.Fields("chart") = wb Then
+
+If ((l = 0) Or (a = 0) Or (b = 0) Or (c = 0)) Then
+If ((exe.Recordset.Fields("l") = l) And (exe.Recordset.Fields("a") = a) And (exe.Recordset.Fields("b") = b) And (exe.Recordset.Fields("c") = c)) Then
+List1.AddItem (exe.Recordset.Fields("wName") & "  " & exe.Recordset.Fields("reps") & "  " & exe.Recordset.Fields("set"))
+End If
+Else
+List1.AddItem (exe.Recordset.Fields("wName") & "  " & exe.Recordset.Fields("reps") & "  " & exe.Recordset.Fields("set"))
+End If
+
+End If
+exe.Recordset.MoveNext
+Wend
+Command2.Visible = False
+
+End Sub
